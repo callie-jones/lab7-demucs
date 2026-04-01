@@ -1,13 +1,11 @@
 #!/bin/sh
 #
 # Local development: Redis + Minio + optional logs pod in Kubernetes;
-# REST and worker run on your laptop (see instructions printed at the end).
+# REST and worker run locally.
 #
 # Prerequisites:
 #   - kubectl configured (Docker Desktop K8s, minikube, or GKE context)
 #   - This script deploys Minio via minio/minio-k8s-dev.yaml (namespace minio-ns).
-#     On GKE you may already have Minio from the course tutorial; if minio-proj
-#     already exists, skip re-applying that file or delete the old release first.
 #
 set -e
 

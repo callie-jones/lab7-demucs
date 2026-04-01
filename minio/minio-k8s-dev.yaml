@@ -1,5 +1,5 @@
 # Minio for local Docker Desktop / minikube (namespace + deployment + service).
-# Matches lab expectations: namespace minio-ns, service name minio-proj, ports 9000/9001.
+# namespace minio-ns, service name minio-proj, ports 9000/9001.
 # Credentials match rest/worker defaults: rootuser / rootpass123
 ---
 apiVersion: v1
