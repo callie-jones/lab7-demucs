@@ -1,0 +1,8 @@
+# Use Python 3.10–3.12. Python 3.13+ may lack PyTorch wheels; 3.14 cannot install torch yet.
+# PyTorch + demucs need NumPy 1.x; NumPy 2.x breaks MP3 export ("Numpy is not available").
+numpy>=1.26,<2
+# demucs 3.x sdists on PyPI can fail to install; use 4.x
+demucs>=4.0.1
+minio>=7.0
+redis>=4.0
+requests>=2.28
