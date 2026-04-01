@@ -14,11 +14,13 @@ spec:
     spec:
       containers:
       - name: master
-        image: redis
+        # mirror.gcr.io caches Docker Hub; avoids flaky "short read" pulls from docker.io
+        image: mirror.gcr.io/library/redis:7-alpine
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
-            cpu: 100m
-            memory: 400Mi
+            cpu: 50m
+            memory: 128Mi
         ports:
         - containerPort: 6379
 ---

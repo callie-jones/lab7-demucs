@@ -9,9 +9,12 @@ import glob
 
 
 #
-# Use localhost & port 5000 if not specified by environment variable REST
+# Use REST env var, e.g. REST=localhost:5001
+# On macOS, port 5000 is often AirPlay Receiver (returns 403) — use 5001 for Flask.
 #
-REST = os.getenv("REST") or "localhost:5000"
+REST = os.getenv("REST") or "localhost:5001"
+# Webhook target for the worker (must match REST host:port, not AirPlay on :5000)
+CALLBACK_BASE = os.getenv("CALLBACK_BASE") or f"http://{REST}"
 
 ##
 # The following routine makes a JSON REST query of the specified type
@@ -36,13 +39,13 @@ def mkReq(reqmethod, endpoint, data, verbose=True):
         return response.text
 
 
-for mp3 in glob.glob("data/short*mp3"):
-    print(f"Separate data/{mp3}")
+for mp3 in glob.glob("data/short*.mp3"):
+    print(f"Separate {mp3}")
     mkReq(requests.post, "apiv1/separate",
         data={
             "mp3": base64.b64encode( open(mp3, "rb").read() ).decode('utf-8'),
             "callback": {
-                "url": "http://localhost:5000",
+                "url": CALLBACK_BASE,
                 "data": {"mp3": mp3, 
                          "data": "to be returned"}
             }
